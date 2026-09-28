@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cozy Planner</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <aside class="sidebar" aria-label="Sidebar navigation">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">C</div>
+          <div>
+            <p class="brand-label">Cozy</p>
+            <h2>Planner</h2>
+          </div>
+        </div>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><button type="button" class="nav-link active" data-view="overview">Overview</button></li>
+            <li><button type="button" class="nav-link" data-view="notes">Notes</button></li>
+            <li><button type="button" class="nav-link" data-view="goals">Goals</button></li>
+          </ul>
+        </nav>
+
+        <button type="button" class="new-button">New plan</button>
+        <section class="profile-panel" aria-label="Profile section">
+          <button type="button" id="openSettingsButton" class="profile-button" aria-label="Open profile settings">
+            <span id="profileAvatar" class="profile-avatar" aria-hidden="true">A</span>
+            <span class="profile-copy">
+              <span id="profileName" class="profile-name">Ariana</span>
+              <span id="profileStatus" class="profile-meta">Focused and calm</span>
+            </span>
+          </button>
+        </section>
+      </aside>
+
+      <main class="main-content" aria-label="Planner content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Good evening</p>
+            <h1>My plans</h1>
+          </div>
+          <div class="date-badge">September 27</div>
+        </header>
+
+        <section class="view-panel active" data-panel="overview" aria-labelledby="overview-title">
+          <div class="overview" aria-labelledby="overview-title">
+            <div class="section-heading">
+              <h2 id="overview-title">Overview</h2>
+            </div>
+
+            <div class="stat-grid">
+              <article class="stat-card">
+                <span>Tasks</span>
+                <strong id="activeTaskCount">0</strong>
+              </article>
+              <article class="stat-card">
+                <span>Completed</span>
+                <strong id="completedTaskCount">0</strong>
+              </article>
+              <article class="stat-card focus-card">
+                <div class="focus-card-heading">
+                  <span>Focus</span>
+                  <strong id="focusCountdown" aria-label="Focus time remaining">25:00</strong>
+                </div>
+                <form id="focusDurationForm" class="focus-duration-form">
+                  <label for="focusDuration">Minutes</label>
+                  <input id="focusDuration" name="duration" type="number" min="1" max="180" step="1" value="25" required />
+                  <button type="submit">Set</button>
+                </form>
+                <div class="focus-controls" aria-label="Focus timer controls">
+                  <button type="button" id="focusStart">Start</button>
+                  <button type="button" id="focusPause" disabled>Pause</button>
+                  <button type="button" id="focusReset">Reset</button>
+                </div>
+              </article>
+            </div>
+
+            <div class="overview-layout">
+              <div class="overview-panel">
+                <div class="section-heading compact">
+                  <h3>Today</h3>
+                </div>
+
+                <ul id="overviewTaskList" class="task-list" aria-live="polite"></ul>
+
+                <div class="completed-panel">
+                  <div class="section-heading compact">
+                    <h3>Completed</h3>
+                  </div>
+
+                  <ul id="completedList" class="completed-list" aria-live="polite"></ul>
+                </div>
+              </div>
+
+              <aside class="calendar-panel" aria-label="Monthly calendar overview">
+                <div class="section-heading compact">
+                  <h3>Calendar</h3>
+                </div>
+
+                <div class="calendar">
+                  <div class="calendar-header">
+                    <button type="button" aria-label="Previous month">‹</button>
+                    <span>September</span>
+                    <button type="button" aria-label="Next month">›</button>
+                  </div>
+
+                  <div class="calendar-grid" aria-label="September calendar">
+                    <span>Mo</span>
+                    <span>Tu</span>
+                    <span>We</span>
+                    <span>Th</span>
+                    <span>Fr</span>
+                    <span>Sa</span>
+                    <span>Su</span>
+
+                    <span class="muted">30</span>
+                    <span class="muted">31</span>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+
+                    <span>6</span>
+                    <span>7</span>
+                    <span>8</span>
+                    <span>9</span>
+                    <span>10</span>
+                    <span>11</span>
+                    <span>12</span>
+
+                    <span>13</span>
+                    <span>14</span>
+                    <span>15</span>
+                    <span>16</span>
+                    <span>17</span>
+                    <span>18</span>
+                    <span>19</span>
+
+                    <span>20</span>
+                    <span>21</span>
+                    <span>22</span>
+                    <span>23</span>
+                    <span>24</span>
+                    <span>25</span>
+                    <span>26</span>
+
+                    <span class="active-day">27</span>
+                    <span>28</span>
+                    <span>29</span>
+                    <span>30</span>
+                    <span class="muted">1</span>
+                    <span class="muted">2</span>
+                    <span class="muted">3</span>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <section class="view-panel" data-panel="notes" aria-labelledby="notes-title">
+          <div class="notes-panel">
+            <div class="section-heading">
+              <h2 id="notes-title">Notes</h2>
+              <button type="button" id="addNoteButton" class="add-note-button">Add note</button>
+            </div>
+
+            <div id="notesList" class="notes-list" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section class="view-panel" data-panel="goals" aria-labelledby="goals-title">
+          <div class="goals-panel">
+            <div class="section-heading">
+              <h2 id="goals-title">Goals</h2>
+              <button type="button" id="addGoalButton" class="add-goal-button">Add goal</button>
+            </div>
+
+            <ul id="goalList" class="goal-list" aria-live="polite"></ul>
+          </div>
+        </section>
+
+        <section class="view-panel" data-panel="settings" aria-labelledby="profileSettingsTitle">
+          <div class="settings-panel">
+            <div class="section-heading">
+              <h2 id="profileSettingsTitle">Profile settings</h2>
+              <button type="button" id="backFromSettings" class="settings-back-button">Back</button>
+            </div>
+
+            <form id="profileSettingsForm" class="settings-form">
+              <label for="profileNameInput">Display name</label>
+              <input id="profileNameInput" name="name" type="text" maxlength="60" required />
+              <label for="profileStatusInput">Status</label>
+              <input id="profileStatusInput" name="status" type="text" maxlength="80" />
+              <fieldset class="theme-fieldset">
+                <legend>Planner color</legend>
+                <div class="theme-options">
+                  <label class="theme-option">
+                    <input type="radio" name="theme" value="warm" checked />
+                    <span class="theme-swatch swatch-warm" aria-hidden="true"></span>
+                    <span>Warm</span>
+                  </label>
+                  <label class="theme-option">
+                    <input type="radio" name="theme" value="sage" />
+                    <span class="theme-swatch swatch-sage" aria-hidden="true"></span>
+                    <span>Sage</span>
+                  </label>
+                  <label class="theme-option">
+                    <input type="radio" name="theme" value="rose" />
+                    <span class="theme-swatch swatch-rose" aria-hidden="true"></span>
+                    <span>Rose</span>
+                  </label>
+                  <label class="theme-option">
+                    <input type="radio" name="theme" value="blue-hour" />
+                    <span class="theme-swatch swatch-blue" aria-hidden="true"></span>
+                    <span>Blue hour</span>
+                  </label>
+                  <label class="theme-option">
+                    <input type="radio" name="theme" value="lilac" />
+                    <span class="theme-swatch swatch-lilac" aria-hidden="true"></span>
+                    <span>Lilac</span>
+                  </label>
+                </div>
+              </fieldset>
+              <div class="settings-actions">
+                <button type="submit" class="settings-save-button">Save profile</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+
+    </div>
+
+    <dialog id="taskDialog" class="task-dialog" aria-labelledby="taskDialogTitle">
+      <form id="taskForm" class="task-form">
+        <h2 id="taskDialogTitle">New plan</h2>
+        <label for="taskTitle">Task</label>
+        <input id="taskTitle" name="title" type="text" maxlength="100" required />
+        <label for="taskTime">Time</label>
+        <input id="taskTime" name="time" type="text" maxlength="30" placeholder="e.g. 9:00 AM or Anytime" />
+        <div class="task-form-actions">
+          <button type="button" class="cancel-button">Cancel</button>
+          <button type="submit" class="save-button">Create plan</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="noteDialog" class="task-dialog note-dialog" aria-labelledby="noteDialogTitle">
+      <form id="noteForm" class="task-form">
+        <h2 id="noteDialogTitle">New note</h2>
+        <label for="noteTitle">Title</label>
+        <input id="noteTitle" name="title" type="text" maxlength="100" required />
+        <label for="noteBody">Note</label>
+        <textarea id="noteBody" name="body" rows="6" maxlength="2000" required></textarea>
+        <div class="task-form-actions">
+          <button type="button" class="cancel-button">Cancel</button>
+          <button type="submit" class="save-button">Add note</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="goalDialog" class="task-dialog" aria-labelledby="goalDialogTitle">
+      <form id="goalForm" class="task-form">
+        <h2 id="goalDialogTitle">New goal</h2>
+        <label for="goalText">Goal</label>
+        <input id="goalText" name="goal" type="text" maxlength="200" required />
+        <div class="task-form-actions">
+          <button type="button" class="cancel-button">Cancel</button>
+          <button type="submit" class="save-button">Add goal</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
